@@ -4,3 +4,5 @@ import:
   version: ^2.1.0
   subpackages:
   - middleware
+-package: github.com/flosch/pongo2
+
