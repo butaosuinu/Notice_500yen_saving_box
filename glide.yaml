@@ -1,0 +1,6 @@
+package: gophass_server
+import:
+- package: github.com/labstack/echo
+  version: ^2.1.0
+  subpackages:
+  - middleware

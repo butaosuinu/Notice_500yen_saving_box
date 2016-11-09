@@ -1,0 +1,21 @@
+{
+  "name": "HK_1601",
+  "description": "",
+  "main": "app.js",
+  "authors": [
+    "HK_1601 team"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/jphacks/HK_1601",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "uikit": "^2.27.2"
+  }
+}
