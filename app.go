@@ -1,11 +1,11 @@
 package main
 
 import (
-	"./Notice_500yen_saving_box/controller/api"
 	"github.com/labstack/echo"
 	"github.com/labstack/echo/engine/standard"
 	"github.com/labstack/echo/middleware"
 	"net/http"
+	"notice_500yen_saving_box/controller/api"
 )
 
 func main() {
@@ -20,7 +20,7 @@ func main() {
 	})
 
 	apiv1 := e.Group("/api/v1")
-	apiv1.POST("/saving", api.postSaving)
+	apiv1.POST("/saving", api.PostSaving)
 
 	e.Run(standard.New(":8080"))
 }
