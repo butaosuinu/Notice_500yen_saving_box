@@ -4,5 +4,6 @@ import:
   version: ^2.1.0
   subpackages:
   - middleware
--package: github.com/flosch/pongo2
-
+- package: gopkg.in/mgo.v2
+- package: github.com/flosch/pongo2
+  version: ^3.0.0

@@ -1,10 +1,12 @@
-hash: 184e58e71fd203feb1ba5bb365b66e9e4a885a7b440b974063538b91641618fe
-updated: 2016-11-09T15:10:10.872135861+09:00
+hash: eceafe5e9f4677d58e746f6502b43afdbcc70963c56404289a8c6aaa69f82982
+updated: 2016-11-14T07:19:53.463695634+09:00
 imports:
 - name: github.com/dgrijalva/jwt-go
   version: 9ed569b5d1ac936e6494082958d63a6aa4fff99a
+- name: github.com/flosch/pongo2
+  version: 5e81b817a0c48c1c57cdf1a9056cf76bdee02ca9
 - name: github.com/labstack/echo
-  version: 04e6901d05b58ddbae579a6252a3d1bb3f334adc
+  version: e08070379af60f5b9c0fb5bb2d1527ba9624fe43
   subpackages:
   - middleware
   - engine/standard
@@ -32,4 +34,6 @@ imports:
   version: 9a2e24c3733eddc63871eda99f253e2db29bd3b9
   subpackages:
   - unix
+- name: gopkg.in/mgo.v2
+  version: 3f83fa5005286a7fe593b055f0d7771a7dce4655
 testImports: []
