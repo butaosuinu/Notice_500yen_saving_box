@@ -4,8 +4,7 @@ var commonsPlugin = new webpack.optimize.CommonsChunkPlugin('common.js');
 
 module.exports = {
 	entry: {
-		'/bundle': './public/src/js/main.js',
-		'../../meshScript/dist/savingMesh': './meshScript/src/savingMesh.js'
+		'/bundle': './public/src/js/main.js'
 	},
 	output: {
 		path: __dirname + '/public/js',
