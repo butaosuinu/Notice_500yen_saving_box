@@ -64,7 +64,9 @@ func UpdateBalance(time string) {
 	nowBalance, _ := strconv.Atoi(nowBalanceData.Balance)
 	fmt.Println(nowBalanceData.Time)
 
-	if nowBalance == 0 || len(nowBalanceData.Time) == 0 {
+	selector := bson.M{"time": nowBalanceData.Time}
+
+	if nowBalanceData.Time == "" {
 		initBalance := &Balance{
 			Time:    time,
 			Balance: "500",
@@ -74,9 +76,8 @@ func UpdateBalance(time string) {
 		if err != nil {
 			fmt.Printf("%+v \n", err)
 		}
+		return
 	}
-
-	selector := bson.M{"time": nowBalanceData.Time}
 
 	newBalanceStr := strconv.Itoa(nowBalance + 500)
 	newBalance := &Balance{
@@ -105,11 +106,14 @@ func ResetBalance(time string) {
 	defer session.Close()
 	col := session.DB("notice_saving").C("balance")
 
+	nowBalanceData := GetNowBalance()
+	selector := bson.M{"time": nowBalanceData.Time}
+
 	balance := &Balance{
 		Time:    time,
 		Balance: strconv.Itoa(0),
 	}
-	err := col.Insert(balance)
+	err := col.Update(selector, balance)
 
 	if err != nil {
 		if mgo.IsDup(err) {
