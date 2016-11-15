@@ -21,6 +21,8 @@ func main() {
 
 	apiv1 := e.Group("/api/v1")
 	apiv1.POST("/saving", api.PostSaving)
+	apiv1.GET("/balance", api.GetBalance)
+	apiv1.POST("/reset_balance", api.PostResetBalance)
 
 	e.Run(standard.New(":8080"))
 }
