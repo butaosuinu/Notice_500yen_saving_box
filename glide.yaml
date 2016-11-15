@@ -1,4 +1,4 @@
-package: gophass_server
+package: notice_500yen_saving_box
 import:
 - package: github.com/labstack/echo
   version: ^2.1.0
