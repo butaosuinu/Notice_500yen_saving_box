@@ -16,6 +16,11 @@ type Balance struct {
 	Balance string `bson:"balance"`
 }
 
+type OpenBox struct {
+	Time   string `bson:"time"`
+	Taking int    `bson:"taking"`
+}
+
 // Saving
 // 貯金結果をDBに保存する
 func SaveSavingCount(time string) {
@@ -115,5 +120,22 @@ func ResetBalance(time string) {
 		} else {
 			fmt.Printf("%+v \n", err)
 		}
+	}
+}
+
+// InsertOpenBoxRecord
+// 貯金箱を開いた記録をDBに保存する
+func InsertOpenBoxRecord(time string, takingAmount int) {
+	session, _ := mgo.Dial("mongodb://localhost/notice_saving")
+	defer session.Close()
+	col := session.DB("notice_saving").C("open_box")
+
+	openingBoxData := &OpenBox{
+		Time:   time,
+		Taking: takingAmount,
+	}
+	err := col.Insert(openingBoxData)
+	if err != nil {
+		fmt.Printf("%+v \n", err)
 	}
 }

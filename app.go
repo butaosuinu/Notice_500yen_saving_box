@@ -22,7 +22,10 @@ func main() {
 	apiv1 := e.Group("/api/v1")
 	apiv1.POST("/saving", api.PostSaving)
 	apiv1.GET("/balance", api.GetBalance)
-	apiv1.POST("/reset_balance", api.PostResetBalance)
+	apiv1.POST("/balance/reset", api.PostResetBalance)
+
+	apiv1.POST("/vibration", api.PostDetectedVibration)
+	apiv1.POST("/open_box", api.PostOpenBox)
 
 	e.Run(standard.New(":8080"))
 }
