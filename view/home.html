@@ -18,7 +18,17 @@
 	<div class="uk-container uk-container-center uk-margin-top">
 		<h1>HOME - 統計</h1>
 		<h2>貯金残高</h2>
-		<p>現在の貯金残高 : {{ balance }}</p>
+		<dl class="uk-description-list-horizontal uk-margin-top">
+			<dt>現在の貯金残高</dt>
+			<dd>{{ balance }}円</dd>
+		</dl>
+		<h2>直近の取出し記録</h2>
+		<dl class="uk-description-list-horizontal uk-margin-top">
+			<dt>時間</dt>
+			<dd>{{ open_box_time }}　</dd>
+			<dt>取出し金額</dt>
+			<dd>{{ open_box_taking }}円</dd>
+		</dl>
 	</div>
 	<script src="/public/js/common.js" type="text/javascript" charset="utf-8"></script>
 	<script src="/public/js/bundle.js" type="text/javascript" charset="utf-8"></script>

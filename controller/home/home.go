@@ -16,9 +16,12 @@ func GetHomeIndex(c echo.Context) (err error) {
 	}
 
 	nowBalance := saving.GetNowBalance().Balance
+	latestOpenBoxRecord := saving.FindLatestOpenBoxRecord()
 
 	out, err := tpl.Execute(pongo2.Context{
-		"balance": nowBalance,
+		"balance":         nowBalance,
+		"open_box_time":   latestOpenBoxRecord.Time,
+		"open_box_taking": latestOpenBoxRecord.Taking,
 	})
 	if err != nil {
 		return c.String(http.StatusInternalServerError, "Internal Server Error")

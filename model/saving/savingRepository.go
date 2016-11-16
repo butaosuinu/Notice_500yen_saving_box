@@ -143,3 +143,16 @@ func InsertOpenBoxRecord(time string, takingAmount int) {
 		fmt.Printf("%+v \n", err)
 	}
 }
+
+// FindLatestOpenBoxRecord
+// 直近の取り出し記録を返す
+func FindLatestOpenBoxRecord() *OpenBox {
+	session, _ := mgo.Dial("mongodb://localhost/notice_saving")
+	defer session.Close()
+	col := session.DB("notice_saving").C("open_box")
+	openRecord := new(OpenBox)
+	query := col.Find(bson.M{}).Sort("-$natural")
+	query.One(&openRecord)
+
+	return openRecord
+}
