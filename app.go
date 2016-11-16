@@ -6,6 +6,7 @@ import (
 	"github.com/labstack/echo/middleware"
 	"net/http"
 	"notice_500yen_saving_box/controller/api"
+	"notice_500yen_saving_box/controller/home"
 )
 
 func main() {
@@ -18,6 +19,7 @@ func main() {
 	e.GET("/", func(c echo.Context) error {
 		return c.String(http.StatusOK, "Hello world")
 	})
+	e.GET("/home", home.GetHomeIndex)
 
 	apiv1 := e.Group("/api/v1")
 	apiv1.POST("/saving", api.PostSaving)
