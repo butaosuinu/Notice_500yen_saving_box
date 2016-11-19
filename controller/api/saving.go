@@ -1,10 +1,16 @@
 package api
 
 import (
+	"encoding/json"
+	"fmt"
 	"github.com/labstack/echo"
 	"net/http"
 	"notice_500yen_saving_box/model/saving"
 )
+
+type NowBalance struct {
+	Balance string `json:"balace"`
+}
 
 // PostSaving
 // POST /api/v1/saving
@@ -18,9 +24,17 @@ func PostSaving(c echo.Context) (err error) {
 // GetBalance
 // GET /api/v1/balace
 func GetBalance(c echo.Context) (err error) {
-	nowBlance := saving.GetNowBalance().Balance
+	nowBlance := NowBalance{
+		saving.GetNowBalance().Balance,
+	}
 
-	return c.String(http.StatusOK, nowBlance)
+	balanceByte, err := json.Marshal(nowBlance)
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+
+	return c.JSON(http.StatusOK, balanceByte)
 }
 
 // PostResetBalance
