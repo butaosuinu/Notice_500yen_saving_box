@@ -31,19 +31,13 @@ func GetSaving(c echo.Context) (err error) {
 }
 
 // GetBalance
-// GET /api/v1/balace
+// GET /api/v1/balance
 func GetBalance(c echo.Context) (err error) {
 	nowBlance := NowBalance{
 		saving.GetNowBalance().Balance,
 	}
 
-	balanceByte, err := json.Marshal(nowBlance)
-	if err != nil {
-		fmt.Println(err)
-		return
-	}
-
-	return c.JSON(http.StatusOK, balanceByte)
+	return c.JSON(http.StatusOK, nowBlance)
 }
 
 // PostResetBalance
