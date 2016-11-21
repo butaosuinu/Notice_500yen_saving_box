@@ -22,6 +22,7 @@ func main() {
 	e.GET("/home", home.GetHomeIndex)
 
 	apiv1 := e.Group("/api/v1")
+	apiv1.GET("/saving", api.GetSaving)
 	apiv1.POST("/saving", api.PostSaving)
 	apiv1.GET("/balance", api.GetBalance)
 	apiv1.POST("/balance/reset", api.PostResetBalance)

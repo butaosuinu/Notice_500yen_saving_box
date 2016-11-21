@@ -8,7 +8,7 @@ import (
 )
 
 type SavingData struct {
-	Time string `bson:"time"`
+	Time string `bson:"time" json:"time"`
 }
 
 type Balance struct {
@@ -39,6 +39,25 @@ func SaveSavingCount(time string) {
 	fmt.Println(GetNowBalance())
 	UpdateBalance(time)
 	fmt.Println("save success")
+}
+
+// FetchSavingCountCollectionByDate
+// 指定された期間の全ての貯金記録を返す
+func FetchSavingCountCollectionByDate(start string, end string) []SavingData {
+	session, _ := mgo.Dial("mongodb://localhost/notice_saving")
+	defer session.Close()
+	col := session.DB("notice_saving").C("saving_count")
+
+	SavingCollection := make([]SavingData, 0, 10)
+	query := col.Find(bson.M{"$and": []interface{}{
+		bson.M{"time": bson.M{"$gte": start}},
+		bson.M{"time": bson.M{"$lte": end}}}}).Sort("-$natural")
+	err := query.All(&SavingCollection)
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	return SavingCollection
 }
 
 // GetNowBalance

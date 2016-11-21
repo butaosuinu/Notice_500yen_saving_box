@@ -1,8 +1,6 @@
 package api
 
 import (
-	"encoding/json"
-	"fmt"
 	"github.com/labstack/echo"
 	"net/http"
 	"notice_500yen_saving_box/model/saving"
@@ -19,6 +17,17 @@ func PostSaving(c echo.Context) (err error) {
 	saving.SaveSavingCount(savingTime)
 
 	return c.String(http.StatusOK, "saving")
+}
+
+// GetSaving
+// GET /api/v1/saving
+func GetSaving(c echo.Context) (err error) {
+	start := c.QueryParam("start")
+	end := c.QueryParam("end")
+
+	savingCollection := saving.FetchSavingCountCollectionByDate(start, end)
+
+	return c.JSON(http.StatusOK, savingCollection)
 }
 
 // GetBalance
