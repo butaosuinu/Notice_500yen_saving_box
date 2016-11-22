@@ -8,7 +8,9 @@ import (
 )
 
 type SavingData struct {
-	Time string `bson:"time" json:"time"`
+	Val     int    `bson:"val" json:"val"`
+	Time    string `bson:"time" json:"time"`
+	Balance int    `bson:"balance" json:"balace"`
 }
 
 type Balance struct {
@@ -23,12 +25,18 @@ type OpenBox struct {
 
 // Saving
 // 貯金結果をDBに保存する
-func SaveSavingCount(time string) {
+func SaveSavingCount(time string, val int) {
+	UpdateBalance(time)
+
+	nowBalance, _ := strconv.Atoi(GetNowBalance().Balance)
+
 	session, _ := mgo.Dial("mongodb://localhost/notice_saving")
 	defer session.Close()
 	col := session.DB("notice_saving").C("saving_count")
 	savingCount := &SavingData{
-		Time: time,
+		Val:     val,
+		Time:    time,
+		Balance: nowBalance,
 	}
 
 	err := col.Insert(savingCount)
@@ -36,8 +44,6 @@ func SaveSavingCount(time string) {
 		fmt.Printf("%+v \n", err)
 	}
 
-	fmt.Println(GetNowBalance())
-	UpdateBalance(time)
 	fmt.Println("save success")
 }
 

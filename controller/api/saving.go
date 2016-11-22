@@ -14,7 +14,7 @@ type NowBalance struct {
 // POST /api/v1/saving
 func PostSaving(c echo.Context) (err error) {
 	savingTime := c.FormValue("time")
-	saving.SaveSavingCount(savingTime)
+	saving.SaveSavingCount(savingTime, 500)
 
 	return c.String(http.StatusOK, "saving")
 }
